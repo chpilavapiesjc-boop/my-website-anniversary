@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Anniversary</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Lora:ital,wght@0,400;0,500;0,600;1,400&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+  :root{
+    --blush-50: #ffe9f0;
+    --blush-100: #ffd6e5;
+    --blush-200: #ffb8d1;
+    --blush-300: #ff99c8;
+    --blush-400: #ff7db8;
+    --blush-500: #ff6ba8;
+    --blush-600: #f54a97;
+    --blush-700: #d93d80;
+    --blush-800: #a8305f;
+    --blush-900: #6b1d3d;
+  }
+  html,body{height:100%;width:100%;margin:0;}
+  body{
+    background:linear-gradient(135deg, #ffeef7 0%, #ffe0ed 25%, #ffc9df 50%, #ffb8d1 75%, #ffa3c8 100%);
+    background-attachment:fixed;
+    color:var(--blush-900);
+    font-family:'Lora', serif;
+    overflow-x:hidden;
+  }
+  .font-display{font-family:'Playfair Display', serif;letter-spacing:-0.02em;}
+  .font-body{font-family:'Lora', serif;}
+  .font-script{font-family:'Cormorant Garamond', serif;font-style:italic;font-weight:300;}
+
+  /* Subtle texture */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:radial-gradient(circle, rgba(255,182,193,0.08) 1px, transparent 1px);
+    background-size:50px 50px;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* Delicate shimmer */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    background:radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* Floating hearts */
+  .heart-float{
+    position:absolute;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+  }
+  @keyframes floatUp{
+    0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+    5%{opacity:0.5;}
+    95%{opacity:0.5;}
+    100%{transform:translateY(-100vh) rotate(360deg);opacity:0;}
+  }
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s ease, transform 1s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* Hero animations */
+  @keyframes heroScale{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+  }
+  .hero-in{animation:heroScale 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .fade-in{animation:fadeUp 0.9s ease-out forwards;}
+  .delay-1{animation-delay:0.2s;}
+  .delay-2{animation-delay:0.4s;}
+  .delay-3{animation-delay:0.6s;}
+  .delay-4{animation-delay:0.8s;}
+
+  /* Heartbeat */
+  @keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.2);}
+    30%{transform:scale(1);}
+    45%{transform:scale(1.15);}
+    60%{transform:scale(1);}
+  }
+  .heartbeat{animation:heartbeat 1.6s ease-in-out infinite;}
+
+  /* Decorative line */
+  .gold-line{
+    background:linear-gradient(90deg, transparent, rgba(255,182,193,0.6), transparent);
+    height:2px;
+  }
+
+  /* Letter card */
+  .letter-card{
+    background:linear-gradient(135deg, rgba(255,243,245,0.95) 0%, rgba(255,235,241,0.95) 100%);
+    border:1px solid rgba(255,182,193,0.3);
+    box-shadow:0 20px 60px rgba(216,110,145,0.25), inset 0 0 40px rgba(255,220,230,0.4);
+    position:relative;
+    overflow:hidden;
+  }
+  .letter-card::before{
+    content:"";
+    position:absolute;inset:20px;
+    border:1px solid rgba(255,182,193,0.2);
+    pointer-events:none;
+  }
+  .letter-card::after{
+    content:"";
+    position:absolute;inset:24px;
+    border:1px dashed rgba(255,182,193,0.15);
+    pointer-events:none;
+  }
+
+  /* Memory cards */
+  .memory-card{
+    background:linear-gradient(145deg, rgba(255,182,193,0.2), rgba(255,160,180,0.3));
+    border:1px solid rgba(255,182,193,0.4);
+    backdrop-filter:blur(8px);
+    transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .memory-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,182,193,0.7);
+    background:linear-gradient(145deg, rgba(255,160,180,0.3), rgba(255,137,160,0.4));
+    box-shadow:0 15px 40px rgba(216,110,145,0.3);
+  }
+
+  /* Timeline dot */
+  .timeline-dot{
+    background:linear-gradient(135deg, #ffb8d1, #ff99c8);
+    box-shadow:0 0 0 3px rgba(255,243,245,0.9), 0 0 20px rgba(255,160,180,0.6);
+  }
+
+  /* Timeline line */
+  .timeline-line{
+    background:linear-gradient(180deg, transparent, rgba(255,160,180,0.5), rgba(255,99,168,0.4), rgba(255,160,180,0.5), transparent);
+  }
+
+  /* Reason tiles */
+  .reason-tile{
+    background:linear-gradient(145deg, rgba(255,182,193,0.25), rgba(255,160,180,0.35));
+    border:1px solid rgba(255,182,193,0.3);
+    transition:all 0.4s ease;
+  }
+  .reason-tile:hover{
+    transform:translateY(-4px);
+    border-color:rgba(255,160,180,0.6);
+    background:linear-gradient(145deg, rgba(255,160,180,0.35), rgba(255,137,160,0.45));
+  }
+
+  /* Stat card */
+  .stat-card{
+    background:linear-gradient(135deg, rgba(255,160,180,0.2), rgba(255,137,160,0.3));
+    border:1px solid rgba(255,182,193,0.3);
+    transition:all 0.4s ease;
+  }
+  .stat-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(255,160,180,0.5);
+  }
+
+  /* Wax seal */
+  .wax-seal{
+    width:80px;height:80px;
+    background:linear-gradient(135deg, #ff99c8 0%, #ff7db8 50%, #d93d80 100%);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(255,243,245,0.9);
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:32px;
+    box-shadow:0 10px 30px rgba(216,110,145,0.5), inset -3px -3px 10px rgba(0,0,0,0.2), inset 3px 3px 8px rgba(255,255,255,0.3);
+    position:relative;
+  }
+  .wax-seal::before{
+    content:"";
+    position:absolute;inset:8px;
+    border:2px solid rgba(255,243,245,0.4);
+    border-radius:50%;
+  }
+
+  /* Glow effect */
+  .glow{
+    text-shadow:0 0 30px rgba(255,160,180,0.4), 0 0 60px rgba(255,99,168,0.2);
+  }
+
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg, #ffb8d1, #ff99c8);border-radius:10px;}
+
+  @media (max-width:768px){
+    .reveal{transform:translateY(30px);}
+  }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full w-full relative">
+  <!-- Floating hearts background -->
+  <div id="hearts-container" class="fixed inset-0 pointer-events-none" style="z-index:2;"></div>
+  <main class="relative w-full" style="z-index:10;">
+   <!-- HERO SECTION -->
+   <section class="min-h-screen w-full flex items-center justify-center px-6 py-20 relative">
+    <div class="max-w-4xl w-full text-center relative">
+     <!-- Top ornament -->
+     <div class="fade-in delay-1 flex items-center justify-center gap-4 mb-8">
+      <div class="gold-line flex-1 max-w-[100px]"></div>
+      <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-blush-600" style="color:var(--blush-600);"><path d="M12 2v20M2 12h20" />
+      </svg>
+      <div class="gold-line flex-1 max-w-[100px]"></div>
+     </div><!-- Eyebrow text -->
+     <p id="hero-eyebrow" class="fade-in delay-1 font-body italic text-lg md:text-xl tracking-[0.3em] uppercase opacity-80" style="color:var(--blush-900);">To my baby</p><!-- Main name -->
+     <h1 id="partner-name" class="hero-in font-display text-7xl md:text-8xl mt-6 leading-none glow" style="color:var(--blush-700);">Eugene</h1><!-- Heart divider -->
+     <div class="fade-in delay-2 flex items-center justify-center gap-6 my-10">
+      <div class="gold-line flex-1 max-w-[150px]"></div><i data-lucide="heart" class="heartbeat" style="color:var(--blush-600);width:28px;height:28px;fill:currentColor;"></i>
+      <div class="gold-line flex-1 max-w-[150px]"></div>
+     </div><!-- Title -->
+     <h2 id="hero-title" class="fade-in delay-2 font-display text-5xl md:text-6xl font-light tracking-wide leading-tight" style="color:var(--blush-800);">Happy Anniversary</h2><!-- Subtitle -->
+     <p class="fade-in delay-3 font-body text-xl md:text-2xl mt-10 max-w-2xl mx-auto leading-relaxed opacity-90" style="color:var(--blush-900);"><span id="years-together">Three</span> years of us. A thousand reasons why. Forever begins now.</p><!-- Scroll hint -->
+     <div class="fade-in delay-4 mt-16 flex flex-col items-center gap-3" style="color:var(--blush-700);">
+      <span class="text-xs tracking-[0.3em] uppercase font-body opacity-70">Scroll with love</span> <i data-lucide="chevron-down" class="animate-bounce" style="width:24px;height:24px;"></i>
+     </div>
+    </div>
+   </section><!-- LETTER SECTION -->
+   <section class="w-full px-6 py-24 flex items-center justify-center reveal">
+    <div class="max-w-3xl w-full">
+     <!-- Section header -->
+     <div class="text-center mb-14">
+      <p class="font-body italic tracking-[0.3em] uppercase text-sm opacity-80" style="color:var(--blush-700);">A love letter</p>
+      <h3 id="letter-title" class="font-display text-5xl md:text-6xl mt-4 leading-tight" style="color:var(--blush-700);">For You</h3>
+     </div><!-- Letter card -->
+     <div class="letter-card rounded-lg p-10 md:p-16">
+      <!-- Corner ornaments -->
+      <svg class="absolute top-6 left-6 w-12 h-12 opacity-40" style="color:var(--blush-600);" viewbox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 20 Q2 2 20 2" /><circle cx="8" cy="8" r="3" fill="currentColor" />
+      </svg>
+      <svg class="absolute top-6 right-6 w-12 h-12 opacity-40" style="color:var(--blush-600);" viewbox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><path d="M38 20 Q38 2 20 2" /><circle cx="32" cy="8" r="3" fill="currentColor" />
+      </svg>
+      <svg class="absolute bottom-6 left-6 w-12 h-12 opacity-40" style="color:var(--blush-600);" viewbox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 20 Q2 38 20 38" /><circle cx="8" cy="32" r="3" fill="currentColor" />
+      </svg>
+      <svg class="absolute bottom-6 right-6 w-12 h-12 opacity-40" style="color:var(--blush-600);" viewbox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><path d="M38 20 Q38 38 20 38" /><circle cx="32" cy="32" r="3" fill="currentColor" />
+      </svg>
+      <div class="relative">
+       <!-- Salutation -->
+       <p class="font-script text-6xl md:text-7xl mb-8" style="color:var(--blush-700);">My Baby,</p><!-- Letter body -->
+       <div id="letter-body" class="font-body text-lg md:text-xl leading-loose space-y-6" style="color:var(--blush-900);">
+        <p>I just want you to know how much I love you. Kahit madalas tayong nag-aaway, sana hindi mo kailanman maisip na hindi kita mahal. Kahit may tampuhan tayo, mahal na mahal pa rin kita, always. Tandaan mo 'yan.</p>
+        <p>Alam ko, lagi kitang pinagpe-pray kay Lord. Pinagdadasal ko na sana hindi ka magsawa sa pag-intindi at pagmamahal sa'kin. Sana rin huwag kang magbago, kasi iiyak talaga ako. Oo na, corny na 'tong ginagawa ko pero wala ka kasi choice kasi mahal kita hehe.</p>
+        <p>Thank you for choosing me, again and again, kahit anong away pa 'yan. I promise to keep choosing you — sa mga simpleng araw, sa mga away natin, at sa lahat ng oras.</p>
+        <p>I love you so much. Sana magustuhan mo 'tong simple gift ko sa 'yo. 🤍</p>
+       </div><!-- Signature section -->
+       <div class="mt-12 flex items-end justify-between flex-wrap gap-8">
+        <div>
+         <p class="font-body italic text-lg opacity-80" style="color:var(--blush-700);">Nagmamahal,</p>
+         <p id="signature" class="font-script text-6xl mt-2" style="color:var(--blush-600);">Cheche</p>
+        </div>
+        <div class="wax-seal"><span>E</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- TIMELINE SECTION -->
+   <section class="w-full px-6 py-24 reveal">
+    <div class="max-w-5xl mx-auto">
+     <!-- Section header -->
+     <div class="text-center mb-16">
+      <p class="font-body italic tracking-[0.3em] uppercase text-sm opacity-80" style="color:var(--blush-700);">Our beautiful journey</p>
+      <h3 class="font-display text-5xl md:text-6xl mt-4 leading-tight" style="color:var(--blush-700);">Our Story, So Far</h3>
+      <div class="flex items-center justify-center gap-3 mt-8">
+       <div class="gold-line w-16"></div><i data-lucide="heart" style="color:var(--blush-600);width:18px;height:18px;fill:currentColor;"></i>
+       <div class="gold-line w-16"></div>
+      </div>
+     </div><!-- Timeline -->
+     <div class="relative">
+      <!-- Center line (desktop) -->
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] timeline-line hidden md:block"></div><!-- Left line (mobile) -->
+      <div class="absolute left-4 top-0 bottom-0 w-[2px] timeline-line md:hidden"></div>
+      <div class="space-y-16">
+       <!-- Memory 1 -->
+       <div class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+        <div class="memory-card rounded-lg p-8 md:text-right md:pr-12 ml-12 md:ml-0 relative">
+         <p class="font-script text-4xl md:text-5xl mb-3" style="color:var(--blush-600);">The First Hello</p>
+         <p class="font-body italic text-sm tracking-widest uppercase mb-4 opacity-70" style="color:var(--blush-800);">Litmatch</p>
+         <p class="font-body text-lg leading-relaxed opacity-90" style="color:var(--blush-900);">Nag-chat sa akin dahil sa post ko na paa. Love at first sight siya doon eh.</p>
+        </div>
+        <div class="absolute left-4 md:left-1/2 top-8 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-5 h-5 rounded-full timeline-dot"></div>
+        <div class="hidden md:block"></div>
+       </div><!-- Memory 2 -->
+       <div class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+        <div class="hidden md:block"></div>
+        <div class="absolute left-4 md:left-1/2 top-8 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-5 h-5 rounded-full timeline-dot"></div>
+        <div class="memory-card rounded-lg p-8 md:pl-12 ml-12 md:ml-0 relative">
+         <p class="font-script text-4xl md:text-5xl mb-3" style="color:var(--blush-600);">The First Yes I</p>
+         <p class="font-body italic text-sm tracking-widest uppercase mb-4 opacity-70" style="color:var(--blush-800);">Ligaw Yarn?</p>
+         <p class="font-body text-lg leading-relaxed opacity-90" style="color:var(--blush-900);">Hindi siya nakatiis ligawan ako. Kilig ako no'n. Gulat pa siya na bf ko na siya. &gt;_&lt;</p>
+        </div>
+       </div><!-- Memory 3 -->
+       <div class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+        <div class="memory-card rounded-lg p-8 md:text-right md:pr-12 ml-12 md:ml-0 relative">
+         <p class="font-script text-4xl md:text-5xl mb-3" style="color:var(--blush-600);">Our Little Dreams</p>
+         <p class="font-body italic text-sm tracking-widest uppercase mb-4 opacity-70" style="color:var(--blush-800);">Future Plans</p>
+         <p class="font-body text-lg leading-relaxed opacity-90" style="color:var(--blush-900);">Thinking about our future together, imagining what we'll be when the time comes.</p>
+        </div>
+        <div class="absolute left-4 md:left-1/2 top-8 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-5 h-5 rounded-full timeline-dot"></div>
+        <div class="hidden md:block"></div>
+       </div><!-- Memory 4 -->
+       <div class="relative md:grid md:grid-cols-2 md:gap-12 items-center">
+        <div class="hidden md:block"></div>
+        <div class="absolute left-4 md:left-1/2 top-8 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 w-5 h-5 rounded-full timeline-dot"></div>
+        <div class="memory-card rounded-lg p-8 md:pl-12 ml-12 md:ml-0 relative">
+         <p class="font-script text-4xl md:text-5xl mb-3" style="color:var(--blush-600);">Today &amp; Forever</p>
+         <p class="font-body italic text-sm tracking-widest uppercase mb-4 opacity-70" style="color:var(--blush-800);">I Love You</p>
+         <p class="font-body text-lg leading-relaxed opacity-90" style="color:var(--blush-900);">Ikaw pa rin ang pipiliin ko, segu-segundo, minu-minuto, oras-oras.</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- REASONS GRID -->
+   <section class="w-full px-6 py-24 reveal">
+    <div class="max-w-5xl mx-auto">
+     <div class="text-center mb-16">
+      <p class="font-body italic tracking-[0.3em] uppercase text-sm opacity-80" style="color:var(--blush-700);">Uncounted reasons</p>
+      <h3 class="font-display text-5xl md:text-6xl mt-4 leading-tight" style="color:var(--blush-700);">Why I Love You</h3>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="sun" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your smile</p>
+      </div>
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="zap" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your strength</p>
+      </div>
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="brain" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your mind</p>
+      </div>
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="book-open" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your chikas</p>
+      </div>
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="heart-handshake" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your heart</p>
+      </div>
+      <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
+       <i data-lucide="flower-2" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Everything</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- STATS SECTION -->
+   <section class="w-full px-6 py-20 reveal">
+    <div class="max-w-4xl mx-auto">
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div class="stat-card rounded-lg p-6 md:p-8 text-center">
+       <p class="font-display text-5xl md:text-6xl" style="color:var(--blush-600);">3</p>
+       <p class="font-body italic tracking-[0.2em] uppercase text-xs mt-3 opacity-80" style="color:var(--blush-800);">Years</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 md:p-8 text-center">
+       <p class="font-display text-5xl md:text-6xl" style="color:var(--blush-600);">1,098</p>
+       <p class="font-body italic tracking-[0.2em] uppercase text-xs mt-3 opacity-80" style="color:var(--blush-800);">Days</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 md:p-8 text-center">
+       <p class="font-display text-5xl md:text-6xl" style="color:var(--blush-600);">∞</p>
+       <p class="font-body italic tracking-[0.2em] uppercase text-xs mt-3 opacity-80" style="color:var(--blush-800);">Memories</p>
+      </div>
+      <div class="stat-card rounded-lg p-6 md:p-8 text-center">
+       <p class="font-display text-5xl md:text-6xl" style="color:var(--blush-600);">1</p>
+       <p class="font-body italic tracking-[0.2em] uppercase text-xs mt-3 opacity-80" style="color:var(--blush-800);">Forever</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- FINAL CLOSING -->
+   <section class="w-full px-6 py-28 reveal">
+    <div class="max-w-3xl mx-auto text-center">
+     <i data-lucide="heart" class="mx-auto heartbeat mb-10" style="color:var(--blush-600);width:48px;height:48px;fill:currentColor;"></i>
+     <p class="font-script text-6xl md:text-7xl leading-tight glow" style="color:var(--blush-800);">I love you so much,</p>
+     <p class="font-script text-7xl md:text-8xl mt-4" style="color:var(--blush-600);">Eugene</p>
+     <p class="font-body italic text-xl md:text-2xl mt-10 opacity-90" style="color:var(--blush-900);">You are my everything</p>
+     <div class="flex items-center justify-center gap-4 mt-14">
+      <div class="gold-line flex-1 max-w-[120px]"></div>
+      <svg width="24" height="24" viewbox="0 0 24 24" fill="currentColor" style="color:var(--blush-600);"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      </svg>
+      <div class="gold-line flex-1 max-w-[120px]"></div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="w-full px-6 py-10 text-center opacity-80">
+    <p class="font-body italic text-sm tracking-[0.2em]" style="color:var(--blush-700);">Made with every ounce of my heart · For you, always</p>
+   </footer>
+  </main>
+  <script>
+  // Floating hearts
+  const heartsContainer = document.getElementById('hearts-container');
+  function spawnHeart(){
+    const heart = document.createElement('div');
+    heart.className = 'heart-float';
+    heart.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(255,107,168,0.3);"><path d="M12 21s-7-4.5-9.5-9.5C1 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3C21 5 23 8.5 21.5 11.5 19 16.5 12 21 12 21z"/></svg>';
+    heart.style.left = Math.random()*100 + '%';
+    heart.style.bottom = '-50px';
+    heart.style.animationDuration = (15 + Math.random()*12) + 's';
+    heartsContainer.appendChild(heart);
+    setTimeout(()=>heart.remove(), 30000);
+  }
+  for(let i=0;i<12;i++) setTimeout(spawnHeart, i*1000);
+  setInterval(spawnHeart, 2000);
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Lucide icons
+  lucide.createIcons();
+
+  // Element SDK
+  const defaultConfig = {
+    hero_eyebrow: "To my baby",
+    hero_title: "Happy Anniversary",
+    partner_name: "Eugene",
+    years_together: "Three",
+    letter_title: "For You",
+    letter_body: "I just want you to know how much I love you. Kahit madalas tayong nag-aaway, sana hindi mo kailanman maisip na hindi kita mahal. Kahit may tampuhan tayo, mahal na mahal pa rin kita, always. Tandaan mo 'yan.\n\nAlam ko, lagi kitang pinagpe-pray kay Lord. Pinagdadasal ko na sana hindi ka magsawa sa pag-intindi at pagmamahal sa'kin. Sana rin huwag kang magbago, kasi iiyak talaga ako. Oo na, corny na 'tong ginagawa ko pero wala ka kasi choice kasi mahal kita hehe.\n\nThank you for choosing me, again and again, kahit anong away pa 'yan. I promise to keep choosing you — sa mga simpleng araw, sa mga away natin, at sa mga pagsubok na dadating sa atin.\n\nI love you so much. Happy anniversary, my one and only baby. Sana magustuhan mo 'tong simple gift ko sa 'yo. 🤍",
+    signature: "Cheche"
+  };
+
+  function applyConfig(config){
+    const get = (k)=> (config[k] !== undefined && config[k] !== "") ? config[k] : defaultConfig[k];
+
+    document.getElementById('hero-eyebrow').textContent = get('hero_eyebrow');
+    document.getElementById('partner-name').textContent = get('partner_name');
+    document.getElementById('hero-title').textContent = get('hero_title');
+    document.getElementById('years-together').textContent = get('years_together');
+    document.getElementById('letter-title').textContent = get('letter_title');
+    document.getElementById('signature').textContent = get('signature');
+
+    const body = get('letter_body');
+    const paras = body.split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean);
+    const letterBody = document.getElementById('letter-body');
+    letterBody.innerHTML = paras.map(p=>`<p>${p.replace(/</g,'&lt;')}</p>`).join('');
+
+    const waxSeal = document.querySelector('.wax-seal span');
+    if (waxSeal){
+      const name = get('partner_name').trim();
+      waxSeal.textContent = name.charAt(0).toUpperCase() || 'E';
+    }
+  }
+
+  if (window.elementSdk){
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["hero_eyebrow", config.hero_eyebrow || defaultConfig.hero_eyebrow],
+        ["hero_title", config.hero_title || defaultConfig.hero_title],
+        ["partner_name", config.partner_name || defaultConfig.partner_name],
+        ["years_together", config.years_together || defaultConfig.years_together],
+        ["letter_title", config.letter_title || defaultConfig.letter_title],
+        ["letter_body", config.letter_body || defaultConfig.letter_body],
+        ["signature", config.signature || defaultConfig.signature]
+      ])
+    });
+  }
+
+  applyConfig(defaultConfig);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f2e2c8e679d5df9',t:'MTc3NzI5NjU0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
