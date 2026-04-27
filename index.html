@@ -210,7 +210,53 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full w-full relative">
-  <!-- Floating hearts background -->
+  <!-- Music Control -->
+  <div class="fixed bottom-6 right-6 z-50">
+   <button id="music-toggle" class="bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all" style="color:var(--blush-600);"> <i data-lucide="music" style="width:24px;height:24px;"></i> </button>
+  </div>
+  <script>
+(function () {
+  const AUDIO_URL = "music.mp3"; 
+  // change if your file is inside a folder like: "assets/music.mp3"
+
+  let audio = new Audio(AUDIO_URL);
+  audio.loop = true;
+  audio.volume = 0.3;
+
+  let isPlaying = false;
+
+  const button = document.getElementById("music-toggle");
+
+  function updateButton() {
+    if (isPlaying) {
+      button.style.backgroundColor = "var(--blush-600)";
+      button.style.color = "white";
+    } else {
+      button.style.backgroundColor = "white";
+      button.style.color = "var(--blush-600)";
+    }
+  }
+
+  button.addEventListener("click", async () => {
+    try {
+      if (!isPlaying) {
+        await audio.play();
+        isPlaying = true;
+      } else {
+        audio.pause();
+        audio.currentTime = 0;
+        isPlaying = false;
+      }
+
+      updateButton();
+    } catch (err) {
+      console.error(err);
+      alert("Music not working. Check file path.");
+    }
+  });
+})();
+</script>
+  </script><!-- Floating hearts background -->
   <div id="hearts-container" class="fixed inset-0 pointer-events-none" style="z-index:2;"></div>
   <main class="relative w-full" style="z-index:10;">
    <!-- HERO SECTION -->
@@ -241,7 +287,7 @@
      <!-- Section header -->
      <div class="text-center mb-14">
       <p class="font-body italic tracking-[0.3em] uppercase text-sm opacity-80" style="color:var(--blush-700);">A love letter</p>
-      <h3 id="letter-title" class="font-display text-5xl md:text-6xl mt-4 leading-tight" style="color:var(--blush-700);">For You</h3>
+      <h3 id="letter-title" class="font-display text-5xl md:text-6xl mt-4 leading-tight" style="color:var(--blush-700);">A Letter From My Hearteu</h3>
      </div><!-- Letter card -->
      <div class="letter-card rounded-lg p-10 md:p-16">
       <!-- Corner ornaments -->
@@ -347,8 +393,8 @@
        <p class="font-body text-lg" style="color:var(--blush-900);">Your strength</p>
       </div>
       <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
-       <i data-lucide="brain" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
-       <p class="font-body text-lg" style="color:var(--blush-900);">Your mind</p>
+       <i data-lucide="volume-2" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
+       <p class="font-body text-lg" style="color:var(--blush-900);">Your voice</p>
       </div>
       <div class="reason-tile rounded-lg p-6 md:p-8 text-center">
        <i data-lucide="book-open" class="mx-auto mb-4" style="color:var(--blush-600);width:32px;height:32px;"></i>
@@ -437,7 +483,7 @@
     hero_title: "Happy Anniversary",
     partner_name: "Eugene",
     years_together: "Three",
-    letter_title: "For You",
+    letter_title: "A Letter From My Hearteu",
     letter_body: "I just want you to know how much I love you. Kahit madalas tayong nag-aaway, sana hindi mo kailanman maisip na hindi kita mahal. Kahit may tampuhan tayo, mahal na mahal pa rin kita, always. Tandaan mo 'yan.\n\nAlam mo, lagi kitang pinagpe-pray kay Lord. Pinagdadasal ko na sana hindi ka magsawa sa pag-intindi at pagmamahal sa'kin. Sana rin huwag kang magbago, kasi iiyak talaga ako. Oo na, corny na 'tong ginagawa ko pero wala ka kasi choice kasi mahal kita hehe.\n\nThank you for choosing me, again and again, kahit anong away pa 'yan. I promise to keep choosing you — sa mga simpleng araw, sa mga away natin, at sa mga pagsubok na dadating sa atin.\n\nI love you so much. Happy anniversary, my one and only baby. Sana magustuhan mo 'tong simple gift ko sa 'yo. 🤍",
     signature: "Cheche"
   };
@@ -488,5 +534,5 @@
 
   applyConfig(defaultConfig);
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f2e2c8e679d5df9',t:'MTc3NzI5NjU0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f2eba6d3370bc34',t:'MTc3NzMwMjM1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
